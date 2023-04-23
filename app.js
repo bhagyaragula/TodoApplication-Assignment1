@@ -220,7 +220,7 @@ app.get("/agenda/", async (request, response) => {
     console.log(newDate);
     const requestQuery = `
         SELECT * FROM todo WHERE due_date='${newDate}';`;
-    const todo = await db.get(requestQuery);
+    const todo = await db.all(requestQuery);
     response.send(todo.map((eachItem) => convertObject(eachItem)));
   } else {
     response.status(400);
