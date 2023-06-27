@@ -75,7 +75,7 @@ const convertObject = (dbObject) => {
 };
 
 app.get("/todos/", async (request, response) => {
-  let db = null;
+  let data = null;
   let getToDosQuery = "";
   const { search_q = "", priority, status, category } = request.query;
 
@@ -191,7 +191,7 @@ app.get("/todos/", async (request, response) => {
       break;
     case hasSearchProperties(request.query):
       getToDosQuery = `
-                    SELECT * FROM todo WHERE todo LIKE '%{search_q}%';`;
+                    SELECT * FROM todo WHERE todo LIKE '%${search_q}%';`;
       data = await db.all(getToDosQuery);
       response.send(data.map((eachItem) => convertObject(eachItem)));
       break;
